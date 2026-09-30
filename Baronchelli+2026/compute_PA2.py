@@ -1,7 +1,7 @@
 import numpy as np
 
 
-# Data for Table 2
+# Data for Table 2 - Baronchelli et al. (2026)
 # Note: uncertainties are treated as Type B errors
 # (rectangular probability distribution), following international conventions.
 # With this definition, the quoted error is divided by sqrt(3) to obtain
