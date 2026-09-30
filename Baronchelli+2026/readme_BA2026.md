@@ -2,12 +2,16 @@ List of scripts
 
 # histo_PA.py
 
-compute_linear_size.py
 
-compute_PA2.py
 
-Rayleigh_test8.py
+# compute_linear_size.py
 
-MC_sim6.py
+# compute_PA2.py
+computes average PA for scenarios described in Baronchelli et al. 2026, Table 2
 
-compute_probabilities2.py
+
+# Rayleigh_test8.py
+
+# MC_sim6.py
+
+# compute_probabilities2.py
