@@ -212,7 +212,8 @@ for delta, k, pf, sf, pa, sa in zip(
 # PLOT
 # ============================================================
 
-fig, ax_sigma = plt.subplots(figsize=(9.0, 6.0))
+#fig, ax_sigma = plt.subplots(figsize=(9.0, 6.0))
+fig, ax_sigma = plt.subplots(figsize=(10.0, 5.0))
 
 # ------------------------------------------------------------
 # Left axis: significance
@@ -504,26 +505,30 @@ ax_polar.set_theta_zero_location("N")
 # +1 --> clockwise rotation
 # -1 --> counter-clockwise rotation
 ax_polar.set_theta_direction(1)
-
-# Show angles on the circumference (in degrees)
-#ax_polar.set_xticks(np.radians(np.arange(0, 360, 30)))
-#ax_polar.set_xticklabels([f"{angle}°" for angle in np.arange(0, 360, 30)], fontsize=14, fontweight='bold')
-ax_polar.set_xticks(np.radians(np.arange(0, 360, 10)))
+# Show angles on the circumference every 10 degrees
+ax_polar.set_xticks(np.radians(np.arange(0, 360, 10)), ha='center', va='center')
+# Restored fontsize to 14
 ax_polar.set_xticklabels([f"{angle}°" for angle in np.arange(0, 360, 10)], fontsize=14, fontweight='bold')
+
+# Push angle labels heavily away from the outer circle rim
+ax_polar.tick_params(axis='x', pad=12)
 
 # Remove radial labels to keep it clean, leaving only the grid
 ax_polar.set_yticklabels([])
 ax_polar.grid(True, linestyle=':', alpha=0.9)
 
-# Dedicated colorbar
+# Dedicated colorbar (increased pad to 0.15 to prevent touching right-hand labels)
 sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm_color)
 sm.set_array([])
-cbar = plt.colorbar(sm, ax=ax_polar, pad=0.1, aspect=30)
+cbar = plt.colorbar(sm, ax=ax_polar, pad=0.08, aspect=30)
 cbar.set_label('MC occurrences of perturbed PAs', fontsize=14, fontweight='bold')
 cbar.ax.tick_params(labelsize=12)
 
-plt.title('Perturbed PAs distribution ($10^6$ MC Simulations)', fontsize=18, fontweight='bold', pad=20)
-legend = plt.legend(loc='lower right', bbox_to_anchor=(1.1, -0.1), fontsize=14)
+# Increased title pad to 45 so top 14pt labels don't collide with the title
+plt.title('Perturbed PAs distribution ($10^6$ MC Simulations)', fontsize=18, fontweight='bold', pad=45)
+
+# Centered legend below the diagram to clear bottom labels
+legend = plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.08), fontsize=14)
 
 for text in legend.get_texts():
     text.set_fontweight('bold')
@@ -532,6 +537,7 @@ for text in legend.get_texts():
 output_polar = 'combined_polar_distribution_MC.pdf'
 fig.savefig(output_polar, format='pdf', bbox_inches='tight')
 
+# Restored screen display and terminal prints
 plt.show()
 print(f"MC polar plot saved to: {output_polar}")
 print("Analysis completed!")
